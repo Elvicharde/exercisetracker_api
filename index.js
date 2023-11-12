@@ -8,8 +8,8 @@ const app = express();
 
 app.use(cors());
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // provisioning static resources
 app.use("/public", express.static(`${process.cwd()}/public`));
@@ -44,13 +44,12 @@ const startServer = async (PORT, dbUri) => {
 };
 
 try {
-    startServer(PORT);
+    startServer(PORT, process.env.DB_CREDS);
 } catch (error) {
     // handle unresolved or rejected promises and errors
     process.on("unhandledRejection", (err, _) => {
         console.log(`[Error]: ${err.message}`);
         // close the server and exit process
         app.close(() => process.exit(1));
-        return;
     });
 }

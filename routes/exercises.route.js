@@ -9,9 +9,9 @@ import {
 } from "../controllers/exercisesController.js";
 
 // exercise post handler
-router.route("/exercises").post(createUserExercises);
+router.route("/:_id/exercises").post(createUserExercises);
 
 //exercises fetch handler
-router.route("/logs?[from][&to][&limit]").get(fetchUserExercises);
+router.route("/:_id/logs").get(fetchUserExercises);
 
 export { router as exercisesRouter };

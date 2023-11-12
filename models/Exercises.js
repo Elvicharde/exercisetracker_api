@@ -2,17 +2,18 @@ import mongoose from "mongoose";
 mongoose.set("strictQuery", false);
 
 const exerciseSchema = new mongoose.Schema({
-    description: {
-        type: String,
-        required: true,
-    },
+    userId: String,
+    date: Date,
     duration: {
         type: Number,
         required: true,
     },
-    date: Date,
+    description: {
+        type: String,
+        required: true,
+    },
 });
 
 const Exercises = mongoose.model("exercises", exerciseSchema);
 
-export default Exercises;
+export { Exercises };
