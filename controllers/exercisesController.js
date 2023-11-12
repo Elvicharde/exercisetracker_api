@@ -64,11 +64,20 @@ const fetchUserExercises = async (req, res) => {
         const exercises = await Exercises.find(filter).limit(+limit);
         const exerciseCount = await Exercises.countDocuments({ userId: id });
 
+        const updatedExercises = exercises.map((exercise) => {
+            const { description, duration, date } = exercise;
+            return {
+                description,
+                duration,
+                date: date.toDateString(),
+            };
+        });
+
         const response = {
             username: user.username,
             count: exerciseCount,
             _id: user._id,
-            log: exercises,
+            log: updatedExercises,
         };
 
         console.log("Exercise fetched!");
